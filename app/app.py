@@ -4,6 +4,7 @@ import threading
 
 app = Flask(__name__)
 
+
 class Camera:
     def __init__(self):
         self.camera = cv2.VideoCapture(0)
@@ -20,6 +21,7 @@ class Camera:
         frame = buffer.tobytes()
         return frame
 
+
 def generate_frames(camera):
     while True:
         frame = camera.get_frame()
@@ -28,18 +30,17 @@ def generate_frames(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+
 @app.route('/video_feed')
 def video_feed():
     camera = Camera()
     return Response(generate_frames(camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/')
-def index():
-    return render_template('home.html')
 
-@app.route('/me')
+@app.route('/')
 def Show_me():
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
