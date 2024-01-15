@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Webcam Feed</title>
+    <script>
+        document.addEventListener("visibilitychange", function() {
+            var vdiv = document.getElementById("videofeed")
+            try {
+                if (document.visibilityState === "visible") {
+                    console.log("User is active");
+                    vdiv.src = "{{ url_for('video_feed') }}";
+                } else {
+                    console.log("User is not active");
+                     vdiv.src = "https://th.bing.com/th/id/R.4dd48db6689918cb0f50e7277c4aa19d?rik=UpzGTXSkkOhJfQ&pid=ImgRaw&r=0";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+    </script>
 </head>
 <body>
     <div>
-    <h3>Why you watching me? you creep!</h3>
-    <img src="{{ url_for('video_feed') }}" alt="Webcam Feed">
-</div>
+        <h3>Why are you watching me? You creep!</h3>
+        <img id="videofeed" src="{{ url_for('video_feed') }}" alt="Webcam Feed">
+    </div>
 </body>
 </html>
