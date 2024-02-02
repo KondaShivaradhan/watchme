@@ -28,5 +28,11 @@
 - obvious a webcam
 
 ## Usage
-Cd into app and then run
+directly from project directory with default configuration
+```bash
+python start
+```
+cd into app and then run
+
+or you can run it manually with your post configuration
 waitress-serve --host 0.0.0.0 --port 5001 app:app

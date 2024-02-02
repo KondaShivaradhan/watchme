@@ -2,3 +2,4 @@
 app/__pycache__
 *.pyc
 app/__pycache__/app.cpython-310.pyc
+test.java
